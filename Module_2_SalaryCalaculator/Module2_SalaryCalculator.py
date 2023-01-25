@@ -16,9 +16,6 @@ print("\n", "=" * Max_Length)
 
 
 print(Salary_Hour)
-
 print(Hours_Week)
-
 print(Holidays)
-
 print(Vacations)
