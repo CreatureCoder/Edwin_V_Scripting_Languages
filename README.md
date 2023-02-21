@@ -7,7 +7,7 @@ This is a respiratory dedicated to Edwin Vahlkamp's Python code
 2. Module_4_Student_Maintenance
 
 # Descrition:
-SalaryCalculator:
-    Calculates the total salary of the of the user with and/or without holidays and vacations.
- Student_Maintenance:
-    Contains functions that list, add, update, and delete students in a dictionary.
+SalaryCalculator:<br>
+    Calculates the total salary of the of the user with and/or without holidays and vacations.<br>
+Student_Maintenance:<br>
+    Contains functions that list, add, update, and delete students in a dictionary.<br>
