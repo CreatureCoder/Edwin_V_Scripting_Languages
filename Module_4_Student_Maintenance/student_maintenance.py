@@ -71,7 +71,7 @@ def update_student(students):
     print("--------------")
     student_id = dv.get_positive_num("Please enter the ID that is to be updated")
     if student_id > len(students):
-        print(f'   Student ID{student_id} was not found.')
+        print(f'   Student ID #{student_id} was not found.')
         return
 
     student = students[student_id]
