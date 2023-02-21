@@ -149,7 +149,7 @@ def delete_student(students):
         return
 
     del students[student_id]
-    print("Student Deleted")
+    print(f'\nStudent ID #{student_id}: {first_name} {last_name} has been deleted')
 
 
 if __name__ == '__main__':
