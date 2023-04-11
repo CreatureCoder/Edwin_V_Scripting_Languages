@@ -30,63 +30,98 @@ class PasswordValidator:
     __DIGIT_MIN = 2
     __SYMBOL_MIN = 2
 
-    def __init__(self, password=None, debug_mode=False):
-        self.__password = password
+    def __init__(self, debug_mode=False):
+        self.__password = "unknown"
         self.__debug_mode = debug_mode
         self.__errors = []
 
     def __str__(self):
-        if self.__password is None:
-            return "None"
-        else:
-            return self.__password
+        return self.__password
 
-
-    def __is_uppercase_valid(self):
+    def __validate_uppercase(self):
         char_count = sum(1 for c in self.__password if c.isupper())  # can stop counting early
 
         if self.__debug_mode:
-            print(f"{char_count:3d} = {inspect.currentframe().f_code.co_name}")
+            print(inspect.currentframe().f_code.co_name, "=", char_count)
 
-        if char_count >= 2:
-            return True
+        if char_count < PasswordValidator.__UPPERCASE_MIN:
+            raise PasswordException(self.__password, 'uppercase', PasswordValidator.__UPPERCASE_MIN, char_count)
 
-        else:
-            print(f"Password must have at least {PasswordValidator.__UPPERCASE_MIN} uppercase letters.")
-            return False
-
-
-    def __is_lowercase_valid(self):
+    def __validate_lowercase(self):
         char_count = sum(1 for c in self.__password if c.islower())  # can stop counting ear
 
         if self.__debug_mode:
-            print(f"{char_count:3d} = {inspect.currentframe().f_code.co_name}")
+            print(inspect.currentframe().f_code.co_name, "=", char_count)
 
-        if char_count >= 2:
-            return True
+        if char_count < PasswordValidator.__LOWERCASE_MIN:
+            raise PasswordException(self.__password, 'lowercase', PasswordValidator.__LOWERCASE_MIN, char_count)
 
-        else:
-            print(f"Password must have at least {PasswordValidator.__LOWERCASE_MIN} lowercase letters.")
-            return False
+    def __validate_digit(self):
+        char_count = sum(1 for c in self.__password if c.isdigit())  # can stop counting ear
 
+        if self.__debug_mode:
+            print(inspect.currentframe().f_code.co_name, "=", char_count)
 
-    def is_valid(self, password=None):
+        if char_count < PasswordValidator.__DIGIT_MIN:
+            raise PasswordException(self.__password, 'digit', PasswordValidator.__DIGIT_MIN, char_count)
+
+    def __validate_symbol(self):
+        char_count = sum(1 for c in self.__password if not c.isdigit() and c.isalpha)  # can stop counting ear
+
+        if self.__debug_mode:
+            print(inspect.currentframe().f_code.co_name, "=", char_count)
+
+        if char_count < PasswordValidator.__SYMBOL_MIN:
+            raise PasswordException(self.__password, 'symbol', PasswordValidator.__SYMBOL_MIN, char_count)
+
+    def is_valid(self, password):
+        self.__password = password
 
         if self.__debug_mode:
             print("+++++++++DEBUG MODE+++++++++")
+            print("password =", self)
 
-        if password is None:
-            raise Exception("password can not be empty")
+        try:
+            self.__validate_uppercase()
+        except PasswordException as e:
+            self.__errors.append(e)
 
-        self.__password = password
-        uppercase_valid = self.__is_uppercase_valid()
-        lowercase_valid = self.__is_lowercase_valid()
+        try:
+            self.__validate_lowercase()
+        except PasswordException as e:
+            self.__errors.append(e)
 
-        if uppercase_valid and lowercase_valid:
+        try:
+            self.__validate_digit()
+        except PasswordException as e:
+            self.__errors.append(e)
+
+        try:
+            self.__validate_symbol()
+        except PasswordException as e:
+            self.__errors.append(e)
+
+        if len(self.__errors) == 0:
             return True
         else:
-            return False
+            for e in self.__errors:
+                print(f"password must contain {e.log['min_required']} {e.log['error_type']} "
+                      f"but yours only contained {e.log['char_count']}")
+                return False
 
 
 pv = PasswordValidator(debug_mode=True)
-print(pv.is_valid("ABC123abc!"))
+if pv.is_valid("ABC123abc!"):
+    print("Valid Password")
+else:
+    print("Invalid Password")
+
+if pv.is_valid("Abb12!*"):
+    print("Valid Password")
+else:
+    print("Invalid Password")
+
+if pv.is_valid("AAb12!*"):
+    print("Valid Password")
+else:
+    print("Invalid Password")
