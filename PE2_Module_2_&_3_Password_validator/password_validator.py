@@ -12,14 +12,17 @@ __version__ = '1.0'
 __date__ = '2023.04.06'
 __status__ = 'Development'
 
+
 class PasswordException(Exception):
     def __init__(self, password, error_type, min_required, char_count):
-        self.log - {'password': password,
-                    'type': error_type,
+
+        self.log = {'password': password,
+                    'error_type': error_type,
                     'min_required': min_required,
                     'char_count': char_count}
+        print(self.log)
 
-        with open('password_log.txt', 'a', newlin='\n') as csvfile:
+        with open('password_log.txt', 'a', newline='\n') as csvfile:
             writer = csv.writer(csvfile, delimiter='|', quoting=csv.QUOTE_MINIMAL)
             writer.writerow([password, error_type, min_required, char_count])
 
@@ -33,7 +36,7 @@ class PasswordValidator:
     def __init__(self, debug_mode=False):
         self.__password = "unknown"
         self.__debug_mode = debug_mode
-        self.__errors = []
+        self.errors = []
 
     def __str__(self):
         return self.__password
@@ -66,7 +69,7 @@ class PasswordValidator:
             raise PasswordException(self.__password, 'digit', PasswordValidator.__DIGIT_MIN, char_count)
 
     def __validate_symbol(self):
-        char_count = sum(1 for c in self.__password if not c.isdigit() and c.isalpha)  # can stop counting ear
+        char_count = sum(1 for c in self.__password if not c.isdigit() and not c.isalpha())  # can stop counting ear
 
         if self.__debug_mode:
             print(inspect.currentframe().f_code.co_name, "=", char_count)
@@ -77,6 +80,8 @@ class PasswordValidator:
     def is_valid(self, password):
         self.__password = password
 
+        self.errors.clear()
+
         if self.__debug_mode:
             print("+++++++++DEBUG MODE+++++++++")
             print("password =", self)
@@ -84,44 +89,51 @@ class PasswordValidator:
         try:
             self.__validate_uppercase()
         except PasswordException as e:
-            self.__errors.append(e)
+            self.errors.append(e)
 
         try:
             self.__validate_lowercase()
         except PasswordException as e:
-            self.__errors.append(e)
+            self.errors.append(e)
 
         try:
             self.__validate_digit()
         except PasswordException as e:
-            self.__errors.append(e)
+            self.errors.append(e)
 
         try:
             self.__validate_symbol()
         except PasswordException as e:
-            self.__errors.append(e)
+            self.errors.append(e)
+            print(e)
+            print(self.errors)
 
-        if len(self.__errors) == 0:
+        if len(self.errors) == 0:
             return True
         else:
-            for e in self.__errors:
-                print(f"password must contain {e.log['min_required']} {e.log['error_type']} "
-                      f"but yours only contained {e.log['char_count']}")
-                return False
+            return False
+
+
+def display_errors(pv):
+    print("Invalid Password")
+    print(pv)
+    for e in pv.errors:
+        print(f"{e.log['password']} password must contain {e.log['min_required']} {e.log['error_type']} "
+              f"but yours only contained {e.log['char_count']}")
 
 
 pv = PasswordValidator(debug_mode=True)
 if pv.is_valid("ABC123abc!"):
     print("Valid Password")
 else:
-    print("Invalid Password")
+    display_errors(pv.errors)
 
 if pv.is_valid("Abb12!*"):
     print("Valid Password")
 else:
-    print("Invalid Password")
+    display_errors(pv.errors)
 
 if pv.is_valid("AAb12!*"):
     print("Valid Password")
 else:
-    print("Invalid Password")
+    display_errors(pv.errors)
