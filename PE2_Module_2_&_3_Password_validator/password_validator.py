@@ -20,7 +20,6 @@ class PasswordException(Exception):
                     'error_type': error_type,
                     'min_required': min_required,
                     'char_count': char_count}
-        print(self.log)
 
         with open('password_log.txt', 'a', newline='\n') as csvfile:
             writer = csv.writer(csvfile, delimiter='|', quoting=csv.QUOTE_MINIMAL)
@@ -105,8 +104,6 @@ class PasswordValidator:
             self.__validate_symbol()
         except PasswordException as e:
             self.errors.append(e)
-            print(e)
-            print(self.errors)
 
         if len(self.errors) == 0:
             return True
@@ -114,10 +111,9 @@ class PasswordValidator:
             return False
 
 
-def display_errors(pv):
+def display_errors(errors):
     print("Invalid Password")
-    print(pv)
-    for e in pv.errors:
+    for e in errors:
         print(f"{e.log['password']} password must contain {e.log['min_required']} {e.log['error_type']} "
               f"but yours only contained {e.log['char_count']}")
 
