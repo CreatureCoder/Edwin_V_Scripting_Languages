@@ -11,10 +11,10 @@ This is a respiratory dedicated to Edwin Vahlkamp's Python code
 <b>SalaryCalculator: <br></b>
     Calculates the total salary of the of the user with and/or without holidays and vacations.<br>
 <br>
-Student_Maintenance: <br>
+<b>Student_Maintenance: <br></b>
     Contains functions that list, add, update, and delete students in a dictionary.<br>
 <br>
-PE2_Module_2_&_3_PasswordValidator: <br>
+<b>PE2_Module_2_&_3_PasswordValidator: <br></b>
     Password Validator: <br>
         Allows end users to validate basic password. <br>
 <br>
