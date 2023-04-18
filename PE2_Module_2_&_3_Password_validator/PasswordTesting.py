@@ -3,11 +3,11 @@
 """
 Password Testing
 
-Pre-created testing grounds for passwords
+Pre-created testing grounds for passwords.
 
-Pre-creates how to display the error or errors a password invokes
+Pre-creates how to display the error or errors a password invokes.
 
-Uses default and the advance PasswordValidator
+Uses default and the advance PasswordValidator.
 """
 
 import PasswordValidator as PV

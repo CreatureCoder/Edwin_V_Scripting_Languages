@@ -16,7 +16,7 @@ password is not valid and how they want to display the errors.
 End users will call is_valid function to test if a password is valid or not.
 
 End users can deside to activate the DEGUG MODE to see the number of uppercase letters, lowercase letters, digits, and
-symbols the password contains
+symbols the password contains.
 """
 
 import inspect
