@@ -8,7 +8,7 @@ This is a respiratory dedicated to Edwin Vahlkamp's Python code
 3. PE2_Module_2_&_3_PasswordValidator
 
 # Descrition:
-<b>SalaryCalculator: <br><b>
+<b>SalaryCalculator: <br><b/>
     Calculates the total salary of the of the user with and/or without holidays and vacations.<br>
 <br>
 Student_Maintenance: <br>
