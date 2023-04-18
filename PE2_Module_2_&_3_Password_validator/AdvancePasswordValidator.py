@@ -18,6 +18,8 @@ End users will call is_valid function to test if a password is valid or not.
 
 End users can deside to activate the DEGUG MODE to see the number of uppercase letters, lowercase letters, digits, valid
 symbols, and the number af characters the password contains.
+
+GitHub URL: https://github.com/CreatureCoder/Edwin_V_Scripting_Languages.git
 """
 
 

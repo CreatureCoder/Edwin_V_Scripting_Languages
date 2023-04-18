@@ -8,6 +8,8 @@ Pre-created testing grounds for passwords.
 Pre-creates how to display the error or errors a password invokes.
 
 Uses default and the advance PasswordValidator.
+
+GitHub URL: https://github.com/CreatureCoder/Edwin_V_Scripting_Languages.git
 """
 
 import PasswordValidator as PV

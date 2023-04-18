@@ -7,6 +7,8 @@ Stores and formats errors.
 
 When one of the conditions above is not met, the code will store the unmet conditions into a dictionary.  The list is
 stored and recorded in a log file as: ABC123abc!|symbol|2|1.
+
+GitHub URL: https://github.com/CreatureCoder/Edwin_V_Scripting_Languages.git
 """
 
 import csv
