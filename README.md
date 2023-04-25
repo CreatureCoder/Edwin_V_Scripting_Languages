@@ -9,7 +9,7 @@ This is a respiratory dedicated to Edwin Vahlkamp's Python code
 
 # Descrition:
 <b>SalaryCalculator: <br></b>
-    Calculates the total salary of the of the user with and/or without holidays and vacations.<br>
+    Calculates the total salary of the user with and/or without holidays and vacations.<br>
 <br>
 <b>Student_Maintenance: <br></b>
     Contains functions that list, add, update, and delete students in a dictionary.<br>
