@@ -43,6 +43,13 @@ def data_validation():
                 valid_time(lines[5])
 
                 if len(errors) == 0:
+                    name = lines[1]
+                    date_format = "%Y %m %d"
+
+                    lines[1] = name[name.find(',')+1:] +',' + name[:name.find(',')]
+                    lines[3] = lines[3].replace('-', '.')
+                    lines[4] = datetime.strptime(lines[4], date_format)
+
                     valid_writer.writerow(lines)
                 else:
                     invalid_writer.writerow([errors] + lines)
@@ -53,18 +60,13 @@ def valid_id(id):
     global errors
     regex = re.compile(r'^[0-9]+$')
 
-    if re.fullmatch(regex, id):
-        print("Valid id")
-    else:
-        print("Invalid id")
+    if not re.fullmatch(regex, id):
         errors = errors + "I"
 
 
 def valid_name(name):
     global errors
-    if name.find(',') and name.isalpha:
-        print("Found comma")
-    else:
+    if not name.find(',') and not name.isalpha:
         errors += "N"
 
 
@@ -72,10 +74,7 @@ def valid_email(email):
     global errors
     regex = re.compile(r'([A-Za-z0-9]+[.-_])*[A-Za-z0-9]+@[A-Za-z0-9-]+(\.[A-Z|a-z]{2,})+')
 
-    if re.fullmatch(regex,email):
-        print("The given mail is valid")
-    else:
-        print("The given mail is invalid")
+    if not re.fullmatch(regex,email):
         errors += "E"
 
 
@@ -83,10 +82,7 @@ def valid_phone(phone):
     global errors
     rule = re.compile(r'\d{3}-\d{3}-\d{4}')
 
-    if rule.match(phone):
-        print("The given phone number is valid")
-    else:
-        print("The given phone number is invalid")
+    if not rule.match(phone):
         errors += "P"
 
 
@@ -99,22 +95,18 @@ def valid_date(date):
     except ValueError:
         res = False
 
-    if res:
-        print("The given date is valid")
-    else:
-        print("The given date is invalid")
+    if not res:
         errors += "D"
 
 
 def valid_time(time):
     global errors
     regex = re.compile(r'([01]?[0-9]|2[0-3]):[0-5][0-9]')
-    if regex.match(time):
-        print("The given time is valid")
-    else:
-        print("The given time is invalid")
+
+    if not regex.match(time):
         errors += "T"
 
 
 if __name__ == '__main__':
     data_validation()
+
