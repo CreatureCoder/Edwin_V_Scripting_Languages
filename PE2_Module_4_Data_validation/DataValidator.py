@@ -6,6 +6,7 @@ password_validator
 
 import csv
 import re
+from datetime import datetime
 
 # Authorship information
 __author__ = "Edwin Vahlkamp"
@@ -14,15 +15,15 @@ __date__ = "2023.04.25"
 __status__ = "development"
 
 
-errors = []
+errors = ""
 
 
-def reading_files():
+def data_validation():
     global errors
 
     with open('testing_log.txt', mode='r') as testing, \
-         open('invalid_log.txt', mode='r') as invalid, \
-         open('valid_log.txt', mode='r') as valid:
+         open('invalid_log.txt', 'a', newline='\n') as invalid, \
+         open('valid_log.txt', 'a', newline='\n') as valid:
         valid_writer = csv.writer(valid, delimiter=',', quoting=csv.QUOTE_MINIMAL)
         invalid_writer = csv.writer(invalid, delimiter='|', quoting=csv.QUOTE_MINIMAL)
 
@@ -32,20 +33,31 @@ def reading_files():
             print(lines)
             if len(lines) != 6:
                 errors = "C"
+                invalid_writer.writerow([errors] + lines)
+            else:
+                valid_id(lines[0])
+                valid_name(lines[1])
+                valid_email(lines[2])
+                valid_phone(lines[3])
+                valid_date(lines[4])
+                valid_time(lines[5])
 
-
-def valid_data():
-    global errors
-    print("valid_data")
+                if len(errors) == 0:
+                    valid_writer.writerow(lines)
+                else:
+                    invalid_writer.writerow([errors] + lines)
+                print(errors)
 
 
 def valid_id(id):
     global errors
-    if id.isdigit:
+    regex = re.compile(r'^[0-9]+$')
+
+    if re.fullmatch(regex, id):
         print("Valid id")
     else:
         print("Invalid id")
-        errors += "I"
+        errors = errors + "I"
 
 
 def valid_name(name):
@@ -53,7 +65,7 @@ def valid_name(name):
     if name.find(',') and name.isalpha:
         print("Found comma")
     else:
-        errors += ""
+        errors += "N"
 
 
 def valid_email(email):
@@ -79,15 +91,30 @@ def valid_phone(phone):
 
 
 def valid_date(date):
-    if date.isdigit:
-        return True
+    global errors
+    date_format = "%m/%d/%Y"
+
+    try:
+        res = bool(datetime.strptime(date, date_format))
+    except ValueError:
+        res = False
+
+    if res:
+        print("The given date is valid")
+    else:
+        print("The given date is invalid")
+        errors += "D"
 
 
 def valid_time(time):
-    if time.isdigit:
-        return True
+    global errors
+    regex = re.compile(r'([01]?[0-9]|2[0-3]):[0-5][0-9]')
+    if regex.match(time):
+        print("The given time is valid")
+    else:
+        print("The given time is invalid")
+        errors += "T"
 
 
 if __name__ == '__main__':
-    reading_files()
-    valid_phone('111-222-3333')
+    data_validation()
