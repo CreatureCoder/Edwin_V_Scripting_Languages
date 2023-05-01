@@ -37,6 +37,7 @@ be first and last name last, the phone number dashes becomes periods, and the da
 Example of written valid data:
     1,Debbie,Johnson,dejohns2@wsc.edu,111.222.3333,2019-12-31,13:40
 
+GitHub URL: https://github.com/CreatureCoder/Edwin_V_Scripting_Languages.git
 """
 
 import csv

@@ -9,10 +9,10 @@ This is a respiratory dedicated to Edwin Vahlkamp's Python code
 4. PE2_Module_4_Data_validator
 
 # Descrition:
-<b>SalaryCalculator: <br></b>
+<b>Module_2_SalaryCalculator: <br></b>
     Calculates the total salary of the user with and/or without holidays and vacations.<br>
 <br>
-<b>Student_Maintenance: <br></b>
+<b>Module_4_Student_Maintenance: <br></b>
     Contains functions that list, add, update, and delete students in a dictionary.<br>
 <br>
 <b>PE2_Module_2_&_3_PasswordValidator: <br></b>
@@ -49,7 +49,7 @@ This is a respiratory dedicated to Edwin Vahlkamp's Python code
         End users can deside to activate the DEGUG MODE to see the number of uppercase letters, lowercase letters, digits, valid <br>
         symbols, and the number af characters the password contains. <br>
 
-<b>password_validator</b><br>
+<b>PE2_Module_4_Data_validator:</b><br>
 <br>
 Assesses data from a file, validate if the data, and then sends the data to different files depending if the data is
 good or not.<br>
