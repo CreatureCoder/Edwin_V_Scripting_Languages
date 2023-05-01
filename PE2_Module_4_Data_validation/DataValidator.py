@@ -6,7 +6,7 @@ password_validator
 
 import csv
 import re
-from datetime import datetime
+import datetime
 
 # Authorship information
 __author__ = "Edwin Vahlkamp"
@@ -30,7 +30,6 @@ def data_validation():
         csvWriter = csv.reader(testing, delimiter='|')
 
         for lines in csvWriter:
-            print(lines)
             if len(lines) != 6:
                 errors = "C"
                 invalid_writer.writerow([errors] + lines)
@@ -44,11 +43,11 @@ def data_validation():
 
                 if len(errors) == 0:
                     name = lines[1]
-                    date_format = "%Y %m %d"
 
                     lines[1] = name[name.find(',')+1:] +',' + name[:name.find(',')]
                     lines[3] = lines[3].replace('-', '.')
-                    lines[4] = datetime.strptime(lines[4], date_format)
+                    date_trans = datetime.datetime.strptime(lines[4], '%m/%d/%Y')
+                    lines[4] = date_trans.strftime("%Y-%m-%d")
 
                     valid_writer.writerow(lines)
                 else:
@@ -91,7 +90,7 @@ def valid_date(date):
     date_format = "%m/%d/%Y"
 
     try:
-        res = bool(datetime.strptime(date, date_format))
+        res = bool(datetime.datetime.strptime(date, date_format))
     except ValueError:
         res = False
 
