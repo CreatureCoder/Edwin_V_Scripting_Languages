@@ -52,7 +52,6 @@ def data_validation():
                     valid_writer.writerow(lines)
                 else:
                     invalid_writer.writerow([errors] + lines)
-                print(errors)
 
 
 def valid_id(id):
@@ -60,7 +59,7 @@ def valid_id(id):
     regex = re.compile(r'^[0-9]+$')
 
     if not re.fullmatch(regex, id):
-        errors = errors + "I"
+        errors +="I"
 
 
 def valid_name(name):
