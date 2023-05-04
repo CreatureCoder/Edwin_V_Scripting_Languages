@@ -93,6 +93,7 @@ def data_validation():
                     name = lines[1]
 
                     # Formats the name
+                    print(name)
                     lines[1] = name[name.find(',')+1:]
                     lines.insert(2, name[:name.find(',')])
                     # Formats the phone number from dashes to periods
@@ -123,16 +124,14 @@ def valid_id(id):
 
 def valid_name(name):
     """
-    If the supposed name that has a ',' and matches the regex formate, do nothing otherwise add an 'N' to the string of
-    errors
+    If the supposed name that has a ',', do nothing otherwise add an 'N' to the string of errors
 
     :param name: Gets the second piece in the string of data which is the supposed name
     :return: None
     """
     global errors
-    regex = re.compile(r'^([a-z]+)( [a-z]+)*( [a-z]+)*$')
 
-    if not name.find(',') and re.fullmatch(regex, name):
+    if ',' not in name:
         errors += "N"
 
 

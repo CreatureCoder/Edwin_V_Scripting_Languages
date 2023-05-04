@@ -1,1 +1,7 @@
-IPDT|abc|Johnson|dejohns2@gmail.com|1112223333|12/31/80|1340
+INPDT|abc|Johnson|dejohns2@gmail.com|1112223333|12/31/80|1340
+N|1|Debbie|dejohns2@wsc.edu|111-222-3333|12/31/2019|13:40
+E|1|Johnson,Debbie|dejohnswsc.edu|111-222-3333|12/31/2019|13:40
+P|1|Johnson,Debbie|dejohns2@wsc.edu|111/222/3333|12/31/2019|13:40
+D|1|Johnson,Debbie|dejohns2@wsc.edu|111-222-3333|13/31/2019|13:40
+T|1|Johnson,Debbie|dejohns2@wsc.edu|111-222-3333|12/31/2019|24:40
+C|1|Johnson,Debbie|dejohns2@wsc.edu|111-222-3333|12/31/2019|13:40|ace
